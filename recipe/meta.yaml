@@ -1,0 +1,32 @@
+package:
+  name: anaconda-env
+  version: 6.0.1
+
+build:
+  number: 0
+
+outputs:
+  - name: anaconda-env
+    # for windows, this is a placebo package.  The default conda-build activation stuff is all we use.
+    # we just don't want people to have to put selectors on their anaconda-env dep.
+    script: install-anaconda-env.sh      # [unix]
+    test:
+      commands:
+        # Verify the scripts are in-place.
+        {% for state in ["activate", "deactivate"] %}
+        - test -f "${PREFIX}/etc/conda/{{ state }}.d/anaconda-env_{{ state }}.sh"  # [unix]
+        {% endfor %}
+        - echo "I'm on windows, and there's nothing to do here."  # [win]
+        - source ${PREFIX}/etc/conda/activate.d/anaconda-env_activate.sh
+        - if [ -z ${CC+x} ]; then echo "CC is unset after activation" && exit 1; else echo "CC is set to '$CC'"; fi
+        - source ${PREFIX}/etc/conda/deactivate.d/anaconda-env_deactivate.sh
+        - if [ -z ${CC+x} ]; then echo "CC is unset after deactivation "; else echo "CC is set to '$CC' after deactivation" && exit 1; fi
+
+about:
+  home: https://github.com/conda-forge/anaconda-env-feedstock
+  license: BSD 3-Clause
+  summary: A meta-package to enable mock Anaconda clang 4.0 environ.
+
+extra:
+  recipe-maintainers:
+    - dakcarto
