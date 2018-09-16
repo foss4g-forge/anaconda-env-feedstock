@@ -18,9 +18,13 @@ outputs:
         {% endfor %}
         - echo "I'm on windows, and there's nothing to do here."  # [win]
         - source ${PREFIX}/etc/conda/activate.d/anaconda-env_activate.sh
-        - if [ -z ${CC+x} ]; then echo "CC is unset after activation" && exit 1; else echo "CC is set to '$CC'"; fi
+        - if [ -z ${CLANGXX+x} ]; then echo "CLANGXX is unset after activation" && exit 1; else echo "CLANGXX is set to '$CLANGXX'"; fi
         - source ${PREFIX}/etc/conda/deactivate.d/anaconda-env_deactivate.sh
-        - if [ -z ${CC+x} ]; then echo "CC is unset after deactivation "; else echo "CC is set to '$CC' after deactivation" && exit 1; fi
+        - if [ -z ${CLANGXX+x} ]; then echo "CLANGXX is unset after deactivation "; else echo "CLANGXX is set to '$CLANGXX' after deactivation" && exit 1; fi
+
+requirements:
+    host:
+        - libtool
 
 about:
   home: https://github.com/conda-forge/anaconda-env-feedstock
