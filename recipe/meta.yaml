@@ -27,7 +27,6 @@ requirements:
         - clangdev
         - libcxx
         - llvmdev
-        - libtool
 
 about:
   home: https://github.com/conda-forge/anaconda-env-feedstock
