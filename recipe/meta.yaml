@@ -23,7 +23,10 @@ outputs:
         - if [ -z ${CLANGXX+x} ]; then echo "CLANGXX is unset after deactivation "; else echo "CLANGXX is set to '$CLANGXX' after deactivation" && exit 1; fi
 
 requirements:
-    host:
+    run:
+        - clangdev
+        - libcxx
+        - llvmdev
         - libtool
 
 about:
