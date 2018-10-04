@@ -5,6 +5,12 @@ package:
 build:
   number: 0
 
+requirements:
+    run:
+        - clangdev
+        - libcxx
+        - llvmdev
+
 outputs:
   - name: anaconda-env
     # for windows, this is a placebo package.  The default conda-build activation stuff is all we use.
@@ -21,12 +27,6 @@ outputs:
         - if [ -z ${CLANGXX+x} ]; then echo "CLANGXX is unset after activation" && exit 1; else echo "CLANGXX is set to '$CLANGXX'"; fi
         - source ${PREFIX}/etc/conda/deactivate.d/anaconda-env_deactivate.sh
         - if [ -z ${CLANGXX+x} ]; then echo "CLANGXX is unset after deactivation "; else echo "CLANGXX is set to '$CLANGXX' after deactivation" && exit 1; fi
-
-requirements:
-    run:
-        - clangdev
-        - libcxx
-        - llvmdev
 
 about:
   home: https://github.com/conda-forge/anaconda-env-feedstock
